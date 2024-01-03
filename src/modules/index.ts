@@ -4,6 +4,7 @@ import logger from '@utils/logger';
 import v1HealthCheckRoute from './health-check/v1/health-check.route';
 import v1AuthRoute from './auth/v1/auth.route';
 import v1NotesRoute from './notes/v1/notes.route';
+import v1SearchRoute from './search/v1/search.route';
 
 const modules = [
   {
@@ -18,6 +19,10 @@ const modules = [
   {
     basePath: 'notes',
     router: v1NotesRoute,
+  },
+  {
+    basePath: 'search',
+    router: v1SearchRoute,
   },
 ];
 
