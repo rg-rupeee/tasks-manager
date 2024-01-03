@@ -11,19 +11,13 @@ class Environment {
   PORT: string;
 
   @IsString()
-  MYSQL_HOST: string;
+  MONGODB_HOST: string;
 
   @IsString()
-  MYSQL_PORT: string;
+  MONGODB_PORT: string;
 
   @IsString()
-  MYSQL_USERNAME: string;
-
-  @IsString()
-  MYSQL_PASSWORD: string;
-
-  @IsString()
-  MYSQL_DATABASE: string;
+  MONGODB_DATABASE: string;
 
   @IsString()
   LOG_LEVEL: string;

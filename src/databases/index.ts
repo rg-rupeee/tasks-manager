@@ -1,11 +1,11 @@
-import sqlDataSource from './mySQL/data-source';
+import mongodbDataSource from './mongoDB/data-source';
 import logger from '@utils/logger';
 
-const connections: { mysql?: any } = {};
+const connections: { mongoDB?: any } = {};
 
 const connectDatabases = async () => {
-  connections.mysql = await sqlDataSource.initialize();
-  logger.info('Successfully connected to MYSQL Database');
+  connections.mongoDB = await mongodbDataSource.initialize();
+  logger.info('Successfully connected to mongoDB Database');
 };
 
-export { connections, connectDatabases, sqlDataSource };
+export { connections, connectDatabases, mongodbDataSource as dataSource };
