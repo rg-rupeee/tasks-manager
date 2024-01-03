@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: Taskify
+  description: Tasks Manager Backend
+  version: 1.0.0
+
+paths:
+  /api/v1/health-check:
+    post:
+      summary: Server Heartbeat check
+      responses:
+        "200":
+          description: service is up
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
