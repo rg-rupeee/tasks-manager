@@ -9,6 +9,7 @@ import xss from 'xss-clean';
 import { resolve } from 'path';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
+import contextService from 'request-context';
 import mongoSanitize from 'express-mongo-sanitize';
 import express, { Request, Response } from 'express';
 
@@ -59,6 +60,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
     this.app.use(morgan(config.MORGAN_LOG_LEVEL, { stream }));
+    this.app.use(contextService.middleware('request'));
   }
 
   private registerRoutes() {

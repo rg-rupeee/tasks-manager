@@ -5,6 +5,7 @@ import { generateToken } from '@/utils/token';
 class AuthService {
   public signup = async ({ name, email, password }) => {
     const user = new User({ name, email, password });
+
     try {
       await user.save();
     } catch (err) {
@@ -13,8 +14,11 @@ class AuthService {
       }
       throw err;
     }
+
     delete user.password;
-    const token = generateToken(user.id);
+
+    const token = generateToken({ id: user._id.toString(), email });
+
     return { token, user };
   };
 
@@ -33,7 +37,7 @@ class AuthService {
 
     delete user.password;
 
-    const token = generateToken(user.id);
+    const token = generateToken({ id: user._id.toString(), email });
 
     return { token, user };
   };

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import validationMiddleware from '@middlewares/validation.middleware';
+import protect from '@middlewares/auth.middleware';
 import authController from './notes.controller';
 import {
   createNoteDTO,
@@ -18,6 +19,7 @@ router.get('/', validationMiddleware(getNotesDTO, 'body'), controller.getNotes);
 
 router.get(
   '/:id',
+  protect,
   validationMiddleware(getNoteDTO, 'body'),
   controller.getNote,
 );
