@@ -11,13 +11,7 @@ class Environment {
   PORT: string;
 
   @IsString()
-  MONGODB_HOST: string;
-
-  @IsString()
-  MONGODB_PORT: string;
-
-  @IsString()
-  MONGODB_DATABASE: string;
+  MONGODB_URI: string;
 
   @IsString()
   LOG_LEVEL: string;

@@ -9,8 +9,10 @@ class AuthController {
 
   public signup = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.signup();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const { name, email, password } = req.body;
+
+      const data = await this.service.signup({ name, email, password });
 
       return OK(res)(data);
     },

@@ -1,11 +1,14 @@
-import mongodbDataSource from './mongoDB/data-source';
-import logger from '@utils/logger';
-
-const connections: { mongoDB?: any } = {};
+import {
+  connect as connectMongoDB,
+  disconnect as disconnectMongoDB,
+} from './mongoDB/index';
 
 const connectDatabases = async () => {
-  connections.mongoDB = await mongodbDataSource.initialize();
-  logger.info('Successfully connected to mongoDB Database');
+  await connectMongoDB();
 };
 
-export { connections, connectDatabases, mongodbDataSource as dataSource };
+const disconnectDatabases = async () => {
+  await disconnectMongoDB();
+};
+
+export { connectDatabases, disconnectDatabases };

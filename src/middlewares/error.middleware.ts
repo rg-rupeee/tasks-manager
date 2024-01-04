@@ -4,22 +4,22 @@ import AppError from '@core/Error';
 import logger from '@utils/logger';
 
 const errorMiddleware = (
-  err: AppError,
+  error: AppError | any,
   _req: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction,
 ) => {
-  logger.error(err);
+  logger.error(error);
 
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+  error.statusCode = error.statusCode || 500;
+  error.status = error.status || 'error';
 
-  if (err.isOperational) {
-    return res.status(err.statusCode).json({
+  if (error.isOperational) {
+    return res.status(error.statusCode).json({
       success: false,
-      status: err.status,
-      message: err.message,
+      status: error.status,
+      message: error.message,
     });
   }
 
