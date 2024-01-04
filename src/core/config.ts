@@ -9,6 +9,10 @@ const config = {
     PORT: process.env.MONGODB_PORT,
     DATABASE: process.env.MONGODB_DATABASE,
   },
+  JWT: {
+    SECRET: process.env.JWT_SECRET,
+    EXPIRY: process.env.JWT_EXPIRY,
+  },
 };
 
 export default config;

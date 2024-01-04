@@ -26,4 +26,13 @@ export class signupDTO {
   name: string;
 }
 
-export class loginDTO {}
+export class loginDTO {
+  @IsString()
+  @IsEmail({})
+  email: string;
+
+  @IsString()
+  @MinLength(4)
+  @MaxLength(20)
+  password: string;
+}

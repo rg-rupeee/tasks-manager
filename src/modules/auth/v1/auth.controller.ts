@@ -20,8 +20,9 @@ class AuthController {
 
   public login = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.login();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const { email, password } = req.body;
+      const data = await this.service.login({ email, password });
 
       return OK(res)(data);
     },

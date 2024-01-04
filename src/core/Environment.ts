@@ -14,6 +14,12 @@ class Environment {
   MONGODB_URI: string;
 
   @IsString()
+  JWT_SECRET: string;
+
+  @IsString()
+  JWT_EXPIRY: string;
+
+  @IsString()
   LOG_LEVEL: string;
 
   @IsString()

@@ -4,4 +4,11 @@ export interface IUser {
   password: string;
 }
 
+export interface IUserMethods {
+  correctPassword(
+    candidatePassword: string,
+    userPassword: string,
+  ): Promise<boolean>;
+}
+
 export default IUser;

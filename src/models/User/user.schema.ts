@@ -1,5 +1,7 @@
-import { Schema, model } from 'mongoose';
-import IUser from '@interfaces/user.interface';
+import { Schema, model, Model } from 'mongoose';
+import bcrypt from 'bcrypt';
+
+import IUser, { IUserMethods } from '@interfaces/user.interface';
 
 export const userSchema = new Schema<IUser>({
   name: {
@@ -13,8 +15,34 @@ export const userSchema = new Schema<IUser>({
   },
   password: {
     type: String,
+    select: false,
     required: true,
   },
 });
 
-export const User = model<IUser>('User', userSchema);
+userSchema.index({ email: 1 });
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+
+  this.password = await bcrypt.hash(this.password, 8);
+
+  return next();
+});
+
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password')) return next();
+
+  return next();
+});
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword: string,
+  userPassword: string,
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+type UserModel = Model<IUser, {}, IUserMethods>;
+
+export const User = model<IUser, UserModel>('User', userSchema);
