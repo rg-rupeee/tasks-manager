@@ -1,11 +1,37 @@
-export class getNotesDTO {}
+import { IsString } from 'class-validator';
+import { IsObjectId } from 'class-validator-mongo-object-id';
 
-export class getNoteDTO {}
+export class getNoteDTO {
+  @IsObjectId()
+  id: string;
+}
 
-export class createNoteDTO {}
+export class createNoteDTO {
+  @IsString()
+  text: string;
+}
 
-export class updateNoteDTO {}
+export class updateNoteDTO {
+  @IsObjectId()
+  id: string;
+}
 
-export class deleteNoteDTO {}
+export class updateNoteBodyDTO {
+  @IsString()
+  text: string;
+}
 
-export class shareNoteDTO {}
+export class deleteNoteDTO {
+  @IsObjectId()
+  id: string;
+}
+
+export class shareNoteDTO {
+  @IsObjectId()
+  id: string;
+}
+
+export class shareNoteBodyDTO {
+  @IsObjectId()
+  user_id: string;
+}

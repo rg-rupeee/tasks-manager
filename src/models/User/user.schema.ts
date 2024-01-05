@@ -3,22 +3,25 @@ import bcrypt from 'bcrypt';
 
 import IUser, { IUserMethods } from '@interfaces/user.interface';
 
-export const userSchema = new Schema<IUser>({
-  name: {
-    type: String,
-    required: false,
+export const userSchema = new Schema<IUser>(
+  {
+    name: {
+      type: String,
+      required: false,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      select: false,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    select: false,
-    required: true,
-  },
-});
+  { timestamps: true },
+);
 
 userSchema.index({ email: 1 });
 

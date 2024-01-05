@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import contextService from 'request-context';
 
 import catchAsync from '@middlewares/catchAsync.middleware';
 import AuthService from './notes.service';
@@ -10,7 +11,9 @@ class AuthController {
   public getNotes = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.getNotes();
+      const user = contextService.get('request:user');
+
+      const data = await this.service.getNotes({ user });
 
       return OK(res)(data);
     },
@@ -18,8 +21,11 @@ class AuthController {
 
   public getNote = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.getNote();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const user = contextService.get('request:user');
+      const { id } = req.params;
+
+      const data = await this.service.getNote({ id, user });
 
       return OK(res)(data);
     },
@@ -27,8 +33,11 @@ class AuthController {
 
   public createNote = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.createNote();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const user = contextService.get('request:user');
+      const { text } = req.body;
+
+      const data = await this.service.createNote({ text, user });
 
       return CREATED(res)(data);
     },
@@ -36,8 +45,12 @@ class AuthController {
 
   public updateNote = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.updateNote();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const user = contextService.get('request:user');
+      const { id } = req.params;
+      const { text } = req.body;
+
+      const data = await this.service.updateNote({ id, text, user });
 
       return OK(res)(data);
     },
@@ -45,8 +58,11 @@ class AuthController {
 
   public deleteNote = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.deleteNote();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const user = contextService.get('request:user');
+      const { id } = req.params;
+
+      const data = await this.service.deleteNote({ id, user });
 
       return OK(res)(data);
     },
@@ -54,8 +70,12 @@ class AuthController {
 
   public shareNote = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.shareNote();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const user = contextService.get('request:user');
+      const { id } = req.params;
+      const { user_id } = req.body;
+
+      const data = await this.service.shareNote({ id, user_id, user });
 
       return OK(res)(data);
     },

@@ -4,47 +4,54 @@ import validationMiddleware from '@middlewares/validation.middleware';
 import protect from '@middlewares/auth.middleware';
 import authController from './notes.controller';
 import {
-  createNoteDTO,
-  deleteNoteDTO,
   getNoteDTO,
-  getNotesDTO,
   shareNoteDTO,
   updateNoteDTO,
+  createNoteDTO,
+  deleteNoteDTO,
+  shareNoteBodyDTO,
+  updateNoteBodyDTO,
 } from './notes.schema';
 
 const router = Router();
 const controller = new authController();
 
-router.get('/', validationMiddleware(getNotesDTO, 'body'), controller.getNotes);
+router.get('/', protect, controller.getNotes);
 
 router.get(
   '/:id',
   protect,
-  validationMiddleware(getNoteDTO, 'body'),
+  validationMiddleware(getNoteDTO, 'params'),
   controller.getNote,
 );
 
 router.post(
   '/',
+  protect,
   validationMiddleware(createNoteDTO, 'body'),
   controller.createNote,
 );
 
 router.put(
   '/:id',
-  validationMiddleware(updateNoteDTO, 'body'),
+  protect,
+  validationMiddleware(updateNoteDTO, 'params'),
+  validationMiddleware(updateNoteBodyDTO, 'body'),
   controller.updateNote,
 );
 
 router.delete(
   '/:id',
-  validationMiddleware(deleteNoteDTO, 'body'),
+  protect,
+  validationMiddleware(deleteNoteDTO, 'params'),
   controller.deleteNote,
 );
 
 router.post(
   '/:id/share',
-  validationMiddleware(shareNoteDTO, 'body'),
+  protect,
+  validationMiddleware(shareNoteDTO, 'params'),
+  validationMiddleware(shareNoteBodyDTO, 'body'),
   controller.shareNote,
 );
 
