@@ -1,1 +1,6 @@
-export class searchDTO {}
+import { IsString } from 'class-validator';
+
+export class searchDTO {
+  @IsString()
+  q: string;
+}

@@ -1,3 +1,4 @@
+import contextService from 'request-context';
 import { NextFunction, Request, Response } from 'express';
 
 import catchAsync from '@middlewares/catchAsync.middleware';
@@ -9,8 +10,11 @@ class SearchController {
 
   public search = catchAsync(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      const data = await this.service.search();
+    async (req: Request, res: Response, _next: NextFunction) => {
+      const query = req.query.q as string;
+      const user = contextService.get('request:user');
+
+      const data = await this.service.search({ query, user });
 
       return OK(res)(data);
     },
