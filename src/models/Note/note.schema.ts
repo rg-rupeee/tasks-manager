@@ -26,5 +26,6 @@ export const noteSchema = new Schema<INote>(
 );
 
 noteSchema.index({ email: 1 });
+noteSchema.index({ text: 'text' });
 
 export const Note = model<INote>('Note', noteSchema);

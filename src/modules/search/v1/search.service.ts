@@ -1,4 +1,4 @@
-import { Note } from '@models/Note/note.schema';
+import { Note } from '@models/Note/index';
 
 class SearchService {
   public search = async (data: {
@@ -7,7 +7,7 @@ class SearchService {
   }) => {
     const notes = await Note.find({
       user_id: data.user.id,
-      text: new RegExp(data.query, 'i'),
+      $text: { $search: data.query },
     });
     return { notes };
   };

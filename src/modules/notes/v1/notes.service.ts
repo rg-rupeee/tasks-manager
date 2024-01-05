@@ -1,5 +1,5 @@
 import AppError from '@core/Error';
-import { Note } from '@models/Note/note.schema';
+import { Note } from '@models/Note/index';
 
 class AuthService {
   public getNotes = async (data: { user: { id: string; email: string } }) => {
