@@ -86,8 +86,3 @@ src
 - The repository includes a `.env.example` file as a template for required environment variables.
 
 Feel free to contribute, report issues, or suggest improvements. Happy coding!
-
-
-# Project Structure Tree README
-
-Here's a tree structure of the project for better visualization:
