@@ -10,6 +10,7 @@ import { resolve } from 'path';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import contextService from 'request-context';
+import { rateLimit } from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import express, { Request, Response } from 'express';
 
@@ -61,6 +62,13 @@ class App {
     this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
     this.app.use(morgan(config.MORGAN_LOG_LEVEL, { stream }));
     this.app.use(contextService.middleware('request'));
+    this.app.use(
+      rateLimit({
+        windowMs: 5 * 60 * 1000,
+        limit: 100,
+        legacyHeaders: false,
+      }),
+    );
   }
 
   private registerRoutes() {
