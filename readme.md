@@ -31,7 +31,7 @@ The backend of the Notes Management Application is designed to empower users wit
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/notes-management-backend.git
+   git clone https://github.com/rg-rupeee/tasks-manager.git
    ```
 
 2. **Install Dependencies:**
