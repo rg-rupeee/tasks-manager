@@ -1,20 +1,142 @@
 openapi: 3.0.0
 info:
-  title: Taskify
-  description: Tasks Manager Backend
+  title: NOTES
+  description: Notes Manager Backend
   version: 1.0.0
-
 paths:
   /api/v1/health-check:
-    post:
-      summary: Server Heartbeat check
+    get:
+      summary: Health Check
       responses:
         "200":
-          description: service is up
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
+          description: OK
+  /api/auth/signup:
+    post:
+      summary: Signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: test@gmail.com
+              name: Rupesh Garhwal
+              password: Password@123
+      responses:
+        "200":
+          description: OK
+  /api/auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: test@gmail.com
+              password: Password@123
+      responses:
+        "200":
+          description: OK
+  /api/notes:
+    get:
+      summary: Get Notes
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create Note
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              text: hello rupesh
+      responses:
+        "200":
+          description: OK
+  /api/notes/{noteId}:
+    get:
+      summary: Get Note
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    put:
+      summary: Update Note
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              text: lasdfla alsdkf;a dfadlksfa;dlsf
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete Note
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /api/notes/{noteId}/share:
+    post:
+      summary: Share Note
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              user_id: 65976de5705c43748ae848ef
+      responses:
+        "200":
+          description: OK
+  /api/search:
+    get:
+      summary: Search
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+security:
+  - bearerAuth: []

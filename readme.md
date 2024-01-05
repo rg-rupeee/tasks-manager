@@ -12,6 +12,8 @@ The backend of the Notes Management Application is designed to empower users wit
 
 ## API Endpoints
 
+Access Swagger API Docs at `/docs`
+
 ### Authentication Endpoints
 
 - `POST /api/auth/signup`: Create a new user account.
