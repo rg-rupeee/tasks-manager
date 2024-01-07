@@ -13,7 +13,8 @@
     "format": "eslint . --fix",
     "clean-dist": "npx ts-node scripts/removeDist.ts",
     "copy-assets": "npx ts-node scripts/copyAssets.ts",
-    "postinstall": "npx husky install"
+    "postinstall": "npx husky install",
+    "install:types": "npx typesync"
   },
   "author": "Rupesh Garhwal <rupeshgarhwal3920@gmail.com>",
   "license": "ISC",
@@ -50,6 +51,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/compression": "^1.7.3",
     "@types/cors": "^2.8.14",
+    "@types/eslint": "^8.56.1",
+    "@types/eslint-config-prettier": "^6.11.3",
     "@types/express": "^4.17.17",
     "@types/form-data": "^2.5.0",
     "@types/hpp": "^0.2.2",
@@ -57,7 +60,9 @@
     "@types/morgan": "^1.9.5",
     "@types/multer": "^1.4.7",
     "@types/node": "^20.6.1",
+    "@types/nodemon": "^1.19.6",
     "@types/shelljs": "^0.8.12",
+    "@types/swagger-ui-express": "^4.1.6",
     "@types/yamljs": "^0.2.34",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
