@@ -1,4 +1,4 @@
-import App from '@/App';
+import app from '@/app';
 import logger from '@utils/logger';
 import { connectDatabases } from './databases';
 import { validateEnvironment } from '@core/Environment';
@@ -15,8 +15,6 @@ process.on('unhandledRejection', err => {
 });
 
 const bootstrap = async () => {
-  const app = new App();
-
   await connectDatabases();
 
   await validateEnvironment();
