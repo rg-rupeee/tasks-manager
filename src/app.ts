@@ -17,8 +17,6 @@ import express, { Request, Response } from 'express';
 import config from '@core/config';
 import routes from '@modules/index';
 import logger, { stream } from '@utils/logger';
-import { connectDatabases } from './databases';
-import { validateEnvironment } from '@core/Environment';
 import errorHandler from '@middlewares/error.middleware';
 
 class App {
@@ -93,16 +91,6 @@ class App {
       logger.info(`Server listening on port :: ${this.port}`);
     });
     return this.server;
-  }
-
-  public async connectDatabases() {
-    logger.info('connecting to databases ...');
-    await connectDatabases();
-  }
-
-  public async validateEnvironmentConfig() {
-    logger.info('validating environment configuration');
-    await validateEnvironment();
   }
 }
 

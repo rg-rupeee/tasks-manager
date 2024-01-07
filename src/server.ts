@@ -1,5 +1,7 @@
-import App from '@/app';
+import App from '@/App';
 import logger from '@utils/logger';
+import { connectDatabases } from './databases';
+import { validateEnvironment } from '@core/Environment';
 
 process.on('uncaughtException', err => {
   logger.error('UNCAUGHT EXCEPTION! Shutting down...');
@@ -15,9 +17,11 @@ process.on('unhandledRejection', err => {
 const bootstrap = async () => {
   const app = new App();
 
-  await app.validateEnvironmentConfig();
+  await connectDatabases();
 
-  await app.connectDatabases();
+  await validateEnvironment();
+
+  await connectDatabases();
 
   app.listen();
 };
